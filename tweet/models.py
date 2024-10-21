@@ -8,4 +8,8 @@ from django.contrib.auth.models import User;
 class Tweet(models.Model); 
 
 
-user = models.ForeignKey();
+user = models.ForeignKey(User,on_delete=models.CASCADE);
+
+text = models.TextField(max_length=240)
+
+
