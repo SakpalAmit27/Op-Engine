@@ -12,6 +12,9 @@ class Tweet(models.Model):
     text = models.TextField(max_length=240)
 
     photo = models.ImageField(upload_to="photos/",blank=True,null=True); 
-
-
-
+    
+    #created at and updated at , because user can retweet
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    updated_at = models.DateTimeField(auto_now=True)
