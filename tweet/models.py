@@ -4,3 +4,8 @@ from django.db import models
 from django.contrib.auth.models import User;
 
 # Create your models here.
+#here we are associating every tweet with user#
+class Tweet(models.Model); 
+
+
+user = models.ForeignKey();
