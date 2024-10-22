@@ -15,7 +15,7 @@ def tweet_list(request):
 def tweet_create(request):
     if request.method == "POST":
         #accepting files#
-        TweetForm(request.POST,request.FILES);
+        form = TweetForm(request.POST,request.FILES);
         if form.is_valid():
             tweet = form.save(commit=false)
             tweet.user = request.user

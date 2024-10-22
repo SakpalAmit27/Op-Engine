@@ -6,4 +6,28 @@
 
 {% block content%}
   <h1 class="text-center">welcome to OpEngine</h1>
-{% endblock %}
+
+  <a href="{% url 'tweet_create'%}" class="btn btn-outline btn-secondary">Create tweet</a>
+
+  <div>
+    {%for tweet in tweets%}
+    <div class="card card-side bg-base-100 shadow-xl">
+        <figure>
+          <img
+            src="{{tweet.photo.url}}"
+            alt="Movie" />
+        </figure>
+        <div class="card-body">
+          <h2 class="card-title">{{tweet.user.username}}</h2>
+          <p>{{tweet.text}}</p>
+          <div class="card-actions justify-end">
+            <a href="{%url 'tweet_edit' tweet.id%}" class="btn btn-primary">Edit</a>
+            <a href="{%url 'tweet_delete' tweet.id%}" class="btn btn-error">Delete</a>
+          </div>
+        </div>
+      </div>
+    {% endfor%}
+  </div>
+
+
+  {%endblock%}
