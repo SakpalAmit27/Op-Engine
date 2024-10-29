@@ -1,16 +1,58 @@
-{% extends "layout.html"%}
+{% extends "layout.html" %}
 
 {% block title %}
   OpEngine - Amit
-{% endblock  %}
+{% endblock %}
 
-{% block content%}
-  <h1 class="text-center">welcome to OpEngine</h1>
+{% block content %}
+  <h1 class="text-center text-2xl font-bold mb-6">Welcome to OpEngine</h1>
+
+  <div class="max-w-lg mx-auto bg-base-100 shadow-lg rounded-lg p-6">
+    <h2 class="text-xl font-semibold mb-4 text-center">
+      {% if form.instance.pk %}
+        Edit Tweet
+      {% else %}
+        Create Tweet
+      {% endif %}
+
+      
+    </h2>
 
 
-  <h2>{% if form.instance.pk%}
-     Edit Tweet 
-     {%else%}
-     Create Tweet
-     {%endif%}</h2>
+
+    
+    <!-- Back to Tweet List Button -->
+
+    <div class="flex justify-center mb-4">
+      <a href="{% url 'tweet_list' %}" class="btn btn-secondary">
+        Back to Tweet List
+      </a>
+    </div>
+
+    <form method="post" enctype="multipart/form-data" class="space-y-4">
+      {% csrf_token %}
+      
+      <!-- Loop through form fields to add custom classes -->
+      {% for field in form %}
+        <div class="form-control">
+          {{ field.label_tag }}
+          {{ field }}
+          {% if field.errors %}
+            <p class="text-red-500 text-sm">{{ field.errors }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+
+      <!-- Submit Button -->
+      <div class="flex justify-center">
+        <button type="submit" class="btn btn-primary w-full md:w-auto">
+          {% if form.instance.pk %}
+            Update Tweet
+          {% else %}
+            Create Tweet
+          {% endif %}
+        </button>
+      </div>
+    </form>
+  </div>
 {% endblock %}
