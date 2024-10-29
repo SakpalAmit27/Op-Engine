@@ -1,33 +1,30 @@
-{% extends "layout.html"%}
+{% extends "layout.html" %}
 
 {% block title %}
   OpEngine - Amit
-{% endblock  %}
+{% endblock %}
 
-{% block content%}
-  <h1 class="text-center">welcome to OpEngine</h1>
+{% block content %}
+  <h1 class="text-center text-2xl font-bold mb-6">Welcome to OpEngine</h1>
 
-  <a href="{% url 'tweet_create'%}" class="btn btn-outline btn-secondary">Create tweet</a>
+  <a href="{% url 'tweet_create' %}" class="btn btn-outline btn-secondary mb-4 ml-20 ">Create Tweet</a>
 
-  <div>
-    {%for tweet in tweets%}
-    <div class="card card-side bg-base-100 shadow-xl ">
-        <figure>
-          <img
-            src="{{tweet.photo.url}}"
-            alt="Movie" />
-        </figure>
-        <div class="card-body">
-          <h2 class="card-title">{{tweet.user.username}}</h2>
-          <p>{{tweet.text}}</p>
-          <div class="card-actions justify-end">
-            <a href="{%url 'tweet_edit' tweet.id%}" class="btn btn-primary">Edit</a>
-            <a href="{%url 'tweet_delete' tweet.id%}" class="btn btn-error">Delete</a>
-          </div>
+  <!-- Grid with medium-sized cards that stack vertically -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for tweet in tweets %}
+    <div class="card bg-base-100 shadow-xl max-w-xs mx-auto">
+      <figure class="w-full h-48">
+        <img src="{{ tweet.photo.url }}" alt="Tweet Image" class="object-cover w-full h-full rounded-t-lg" />
+      </figure>
+      <div class="card-body p-4">
+        <h2 class="card-title text-lg font-semibold">{{ tweet.user.username }}</h2>
+        <p class="text-sm">{{ tweet.text }}</p>
+        <div class="card-actions justify-end mt-2">
+          <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary btn-sm">Edit</a>
+          <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-error btn-sm">Delete</a>
         </div>
       </div>
-    {% endfor%}
+    </div>
+    {% endfor %}
   </div>
-
-
-  {%endblock%}
+{% endblock %}
